@@ -38,7 +38,7 @@
 
         public override string ToString()
         {
-            return $"Название предмета: {Name}\r\nКоличество часов: {NumberOfHours}\r\n";
+            return $"Название предмета: {Name}\r\n Количество часов: {NumberOfHours}\r\n";
         }
     }
 }

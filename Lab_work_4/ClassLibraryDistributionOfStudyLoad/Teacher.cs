@@ -67,8 +67,8 @@
 
         public override string ToString()
         {
-            return $"Фамилия: {Surname}\r\nИмя: {Name}\r\nОтчество: {Patronymic}\r\n" +
-                $"Ученая степень: {AcademicDegree}\r\nДолжность: {JobTitle}\r\nСтаж: {Experience}\r\n";
+            return $"Фамилия: {Surname}\r\n Имя: {Name}\r\n Отчество: {Patronymic}\r\n " +
+                $"Ученая степень: {AcademicDegree}\r\n Должность: {JobTitle}\r\n Стаж: {Experience}\r\n";
         }
     }
 }

@@ -45,7 +45,7 @@
 
         public override string ToString()
         {
-            return $"Преподаватель: {Teacher}\r\nПредмет: {Subject}\r\nНомер группы: {GroupNumber}\r\n";
+            return $"Преподаватель: {Teacher}\r\n Предмет: {Subject}\r\n Номер группы: {GroupNumber}\r\n";
         }
     }
 }
