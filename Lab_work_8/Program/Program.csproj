@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ClassLibraryDistributionOfStudyLoad">
+      <HintPath>..\ClassLibraryDistributionOfStudyLoad\bin\Debug\net7.0\ClassLibraryDistributionOfStudyLoad.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsFormsControlLibraryLoad">
+      <HintPath>..\..\Lab_work_7\WindowsFormsControlLibraryLoad\bin\Debug\WindowsFormsControlLibraryLoad.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
