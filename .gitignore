@@ -1,6 +1,5 @@
 .vs
-*/bin
-*/obj
-*/*/bin
-*/*/obj
-*/*/Properties
+.vscode
+bin
+obj
+Properties
