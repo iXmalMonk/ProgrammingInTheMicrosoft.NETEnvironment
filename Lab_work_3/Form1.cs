@@ -7,15 +7,6 @@ namespace Lab_work_3
             InitializeComponent();
         }
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-            textBox1.Text = string.Empty;
-            for (int i = (int)numericUpDown1.Minimum; i <= numericUpDown1.Value; i++)
-            {
-                textBox1.Text += i.ToString() + " ";
-            }
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             comboBox1.Items.Add(textBox2.Text);
@@ -24,11 +15,6 @@ namespace Lab_work_3
         private void button2_Click(object sender, EventArgs e)
         {
             comboBox1.Items.Clear();
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            textBox3.Text = comboBox1.Text;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -120,6 +106,20 @@ namespace Lab_work_3
                 {
                     textBox14.Text += $"x = {a}; f(x) = {Math.Sin(a) / (Math.Abs(a) + 1)}\r\n";
                 }
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            textBox3.Text = comboBox1.Text;
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            textBox1.Text = string.Empty;
+            for (int i = (int)numericUpDown1.Minimum; i <= numericUpDown1.Value; i++)
+            {
+                textBox1.Text += i.ToString() + " ";
             }
         }
     }

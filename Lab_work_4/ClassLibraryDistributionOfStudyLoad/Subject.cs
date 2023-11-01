@@ -13,7 +13,6 @@
         /// Количество часов
         /// </summary>
         public int NumberOfHours { get; set; }
-
         public bool IsValid
         {
             get

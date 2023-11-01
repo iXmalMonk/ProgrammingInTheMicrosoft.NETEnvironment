@@ -17,7 +17,6 @@
         /// Номер группы
         /// </summary>
         public int GroupNumber { get; set; }
-
         public bool IsValid
         {
             get

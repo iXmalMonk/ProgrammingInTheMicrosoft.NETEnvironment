@@ -1,5 +1,3 @@
-using System;
-
 namespace Lab_work_1
 {
     public class Program

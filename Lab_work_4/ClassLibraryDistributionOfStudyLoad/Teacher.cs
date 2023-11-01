@@ -29,7 +29,6 @@
         /// Стаж
         /// </summary>
         public int Experience { get; set; }
-
         public bool IsValid
         {
             get
