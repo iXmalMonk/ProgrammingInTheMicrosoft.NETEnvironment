@@ -265,34 +265,50 @@ namespace Program
 
         private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            int index = dataGridView1.SelectedCells[0].RowIndex;
-            DataGridViewRow dataGridViewRow = dataGridView1.Rows[index];
-            var image = dataGridView1.SelectedRows[0].Cells["image"];
-            if (image.Value != null && image.Value != DBNull.Value)
+            try
             {
-                byte[] bytes = (byte[])image.Value;
-                MemoryStream memoryStream = new MemoryStream(bytes);
-                pictureBox1.Image = Image.FromStream(memoryStream);
+                int index = dataGridView1.SelectedCells[0].RowIndex;
+                DataGridViewRow dataGridViewRow = dataGridView1.Rows[index];
+                var image = dataGridView1.SelectedRows[0].Cells["image"];
+                if (image.Value != null && image.Value != DBNull.Value)
+                {
+                    byte[] bytes = (byte[])image.Value;
+                    MemoryStream memoryStream = new MemoryStream(bytes);
+                    pictureBox1.Image = Image.FromStream(memoryStream);
+                }
+                else
+                {
+                    pictureBox1.Image = null;
+                }
+                textBox1.Text = dataGridViewRow.Cells["manager"].Value.ToString();
+                textBox2.Text = dataGridViewRow.Cells["name"].Value.ToString();
+                string value = dataGridViewRow.Cells["number_of_teachers"].Value.ToString();
+                comboBox1.Text = dataGridViewRow.Cells["faculty_id"].Value.ToString();
+                numericUpDown1.Value = int.Parse(value);
+                toolStripStatusLabel1.Text = "Выбрана строка:" + dataGridViewRow.Cells["id"].Value.ToString();
             }
-            else
+            catch
             {
-                pictureBox1.Image = null;
+                toolStripStatusLabel1.Text = "Строка не выбрана";
             }
-            textBox1.Text = dataGridViewRow.Cells["manager"].Value.ToString();
-            textBox2.Text = dataGridViewRow.Cells["name"].Value.ToString();
-            string value = dataGridViewRow.Cells["number_of_teachers"].Value.ToString();
-            comboBox1.Text = dataGridViewRow.Cells["faculty_id"].Value.ToString();
-            numericUpDown1.Value = int.Parse(value);
         }
 
         private void dataGridView2_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            int index = dataGridView2.SelectedCells[0].RowIndex;
-            DataGridViewRow dataGridViewRow = dataGridView2.Rows[index];
-            textBox3.Text = dataGridViewRow.Cells["dean"].Value.ToString();
-            textBox4.Text = dataGridViewRow.Cells["name"].Value.ToString();
-            string value = dataGridViewRow.Cells["number_of_students"].Value.ToString();
-            numericUpDown2.Value = int.Parse(value);
+            try
+            {
+                int index = dataGridView2.SelectedCells[0].RowIndex;
+                DataGridViewRow dataGridViewRow = dataGridView2.Rows[index];
+                textBox3.Text = dataGridViewRow.Cells["dean"].Value.ToString();
+                textBox4.Text = dataGridViewRow.Cells["name"].Value.ToString();
+                string value = dataGridViewRow.Cells["number_of_students"].Value.ToString();
+                numericUpDown2.Value = int.Parse(value);
+                toolStripStatusLabel1.Text = "Выбрана строка:" + dataGridViewRow.Cells["id"].Value.ToString();
+            }
+            catch
+            {
+                toolStripStatusLabel1.Text = "Строка не выбрана";
+            }
         }
 
         private void propertyToolStripMenuItem_Click(object sender, EventArgs e)
