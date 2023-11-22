@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace Program
         private DataTable _secondDataTable;
         private readonly string _firstQuery = "select id, image, manager, name, number_of_teachers, faculty_id from net.department";
         private readonly string _secondQuery = "select id, dean, name, number_of_students from net.faculty";
+        public ObservableCollection<int> ItemsSource { get; set; }
 
         public MainWindow()
         {
@@ -35,6 +37,8 @@ namespace Program
             _secondAdapter.Fill(_secondDataTable);
             firstDataGrid.ItemsSource = _firstDataTable.DefaultView;
             secondDataGrid.ItemsSource = _secondDataTable.DefaultView;
+            ItemsSource = new ObservableCollection<int>(_secondDataTable.AsEnumerable().Select(row => (int)row["id"]));
+            DataContext = this;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -99,6 +103,8 @@ namespace Program
                 _secondDataTable.Clear();
                 _secondAdapter.Fill(_secondDataTable);
                 secondDataGrid.ItemsSource = _secondDataTable.DefaultView;
+                ItemsSource = new ObservableCollection<int>(_secondDataTable.AsEnumerable().Select(row => (int)row["id"]));
+                GC.Collect();
             }
             catch
             {

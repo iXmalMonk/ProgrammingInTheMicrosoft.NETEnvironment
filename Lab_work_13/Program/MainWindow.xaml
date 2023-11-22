@@ -10,7 +10,35 @@
         <TabControl>
             <TabItem Header="Кафедры">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="firstDataGrid" Margin="0,49,299,0" SelectionChanged="firstDataGrid_SelectionChanged"/>
+                    <DataGrid x:Name="firstDataGrid" Margin="0,49,299,0" SelectionChanged="firstDataGrid_SelectionChanged" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding id}"/>
+                            <DataGridTemplateColumn x:Name="image_department" Header="Фотография" Width="75">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding image}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Заведующий кафедрой" Binding="{Binding manager}"/>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding name}"/>
+                            <DataGridTextColumn Header="Количество учителей" Binding="{Binding number_of_teachers}"/>
+                            <!--<DataGridTextColumn Header="ID факультета" Binding="{Binding faculty_id}"/>-->
+                            <DataGridTemplateColumn Header="ID факультета">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding faculty_id}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <ComboBox ItemsSource="{Binding DataContext.ItemsSource, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                    SelectedItem="{Binding faculty_id}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Button Content="Сохранить" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Button_Click"/>
                     <Button Content="Добавить" HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
                     <Button Content="Удалить" HorizontalAlignment="Left" Margin="139,10,0,0" VerticalAlignment="Top" Click="Button_Click_2"/>
