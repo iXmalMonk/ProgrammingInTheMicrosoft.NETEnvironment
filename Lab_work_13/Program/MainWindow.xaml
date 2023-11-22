@@ -23,7 +23,6 @@
                             <DataGridTextColumn Header="Заведующий кафедрой" Binding="{Binding manager}"/>
                             <DataGridTextColumn Header="Имя" Binding="{Binding name}"/>
                             <DataGridTextColumn Header="Количество учителей" Binding="{Binding number_of_teachers}"/>
-                            <!--<DataGridTextColumn Header="ID факультета" Binding="{Binding faculty_id}"/>-->
                             <DataGridTemplateColumn Header="ID факультета">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
