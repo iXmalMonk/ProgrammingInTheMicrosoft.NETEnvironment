@@ -1,5 +1,98 @@
-﻿@{
+﻿@model Models
+
+@{
     ViewData["Title"] = "Department";
 }
 
 <h1>Department</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Image</th>
+            <th scope="col">Manager</th>
+            <th scope="col">Name</th>
+            <th scope="col">NumberOfTeachers</th>
+            <th scope="col">FacultyId</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var department in Model.Department)
+        {
+            <tr>
+                <th scope="row">@department.Id</th>
+                <td>
+                    @if (department.Image != null)
+                    {
+                        <img class="w-50 h-auto" src="data:image;base64,@Convert.ToBase64String(department.Image)"/>
+                    }
+                </td>
+                <td>@department.Manager</td>
+                <td>@department.Name</td>
+                <td>@department.NumberOfTeachers</td>
+                <td>@department.FacultyId</td>
+                <td>
+                    <form action="/Department/Delete/@department.Id">
+                        <button type="submit" class="btn btn-danger m-1">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<form action="/Department/Insert" enctype="multipart/form-data" method="post">
+    <div class="d-flex justify-content-between">
+        <div class="d-flex flex-column">
+            <label class="m-3">Image:</label>
+            <label class="m-3">Manager:</label>
+            <label class="m-3">Name:</label>
+            <label class="m-3">NumberOfTeachers:</label>
+            <label class="m-3">FacultyId:</label>
+        </div>
+        <div class="d-flex flex-column w-100">
+            <input class="form-control m-2" type="file" name="image" required/>
+            <input class="form-control m-2" type="text" name="manager" required/>
+            <input class="form-control m-2" type="text" name="name" required/>
+            <input class="form-control m-2" type="number" name="numberOfTeachers" required/>
+            <select class="form-control m-2" name="facultyId" required>
+                @foreach (var faculty in Model.Faculty)
+                {
+                    <option value="@faculty.Id">@faculty.Id</option>
+                }
+            </select>
+        </div>
+    </div>
+    <button class="btn btn-success m-1 w-100" type="submit">Insert</button>
+</form>
+<form action="/Department/Update" enctype="multipart/form-data" method="post">
+    <div class="d-flex justify-content-between">
+        <div class="d-flex flex-column">
+            <label class="m-3">Id:</label>
+            <label class="m-3">Image:</label>
+            <label class="m-3">Manager:</label>
+            <label class="m-3">Name:</label>
+            <label class="m-3">NumberOfTeachers:</label>
+            <label class="m-3">FacultyId:</label>
+        </div>
+        <div class="d-flex flex-column w-100">
+            <select class="form-control m-2" name="id" required>
+                @foreach (var department in Model.Department)
+                {
+                    <option value="@department.Id">@department.Id</option>
+                }
+            </select>
+            <input class="form-control m-2" type="file" name="image" required />
+            <input class="form-control m-2" type="text" name="manager" required />
+            <input class="form-control m-2" type="text" name="name" required />
+            <input class="form-control m-2" type="number" name="numberOfTeachers" required />
+            <select class="form-control m-2" name="facultyId" required>
+                @foreach (var faculty in Model.Faculty)
+                {
+                    <option value="@faculty.Id">@faculty.Id</option>
+                }
+            </select>
+        </div>
+    </div>
+    <button class="btn btn-secondary m-1 w-100" type="submit">Update</button>
+</form>
