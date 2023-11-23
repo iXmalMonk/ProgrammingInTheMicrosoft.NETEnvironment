@@ -1,15 +1,40 @@
 ﻿using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Media.Imaging;
 using Npgsql;
 using NpgsqlTypes;
 
 namespace Program
 {
+    public class FacultyIdToNameConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!System.Convert.IsDBNull(value))
+            {
+                int facultyId = (int)value;
+                return MainWindow.FacultyIdName[facultyId];
+            }
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!System.Convert.IsDBNull(value))
+            {
+                string facultyName = (string)value;
+                return MainWindow.FacultyIdName.FirstOrDefault(x => x.Value == facultyName).Key;
+            }
+            return null;
+        }
+    }
+
     public partial class MainWindow : Window
     {
         private readonly NpgsqlConnection _connection;
@@ -21,7 +46,7 @@ namespace Program
         private DataTable _secondDataTable;
         private readonly string _firstQuery = "select id, image, manager, name, number_of_teachers, faculty_id from net.department";
         private readonly string _secondQuery = "select id, dean, name, number_of_students from net.faculty";
-        public ObservableCollection<int> ItemsSource { get; set; }
+        public static Dictionary<int, string> FacultyIdName { get; set; }
 
         public MainWindow()
         {
@@ -37,7 +62,13 @@ namespace Program
             _secondAdapter.Fill(_secondDataTable);
             firstDataGrid.ItemsSource = _firstDataTable.DefaultView;
             secondDataGrid.ItemsSource = _secondDataTable.DefaultView;
-            ItemsSource = new ObservableCollection<int>(_secondDataTable.AsEnumerable().Select(row => (int)row["id"]));
+            FacultyIdName = new Dictionary<int, string>();
+            foreach (DataRow row in _secondDataTable.Rows)
+            {
+                int id = (int)row["id"];
+                string name = (string)row["name"];
+                FacultyIdName[id] = name;
+            }
             DataContext = this;
         }
 
@@ -103,8 +134,27 @@ namespace Program
                 _secondDataTable.Clear();
                 _secondAdapter.Fill(_secondDataTable);
                 secondDataGrid.ItemsSource = _secondDataTable.DefaultView;
-                ItemsSource = new ObservableCollection<int>(_secondDataTable.AsEnumerable().Select(row => (int)row["id"]));
+                FacultyIdName = new Dictionary<int, string>();
+                foreach (DataRow row in _secondDataTable.Rows)
+                {
+                    int id = (int)row["id"];
+                    string name = (string)row["name"];
+                    FacultyIdName[id] = name;
+                }
                 GC.Collect();
+            }
+            catch
+            {
+                return;
+            }
+            try
+            {
+                NpgsqlCommandBuilder commandBuilder = new NpgsqlCommandBuilder(_firstAdapter);
+                _firstAdapter.UpdateCommand = commandBuilder.GetUpdateCommand();
+                _firstAdapter.Update(_firstDataTable);
+                _firstDataTable.Clear();
+                _firstAdapter.Fill(_firstDataTable);
+                firstDataGrid.ItemsSource = _firstDataTable.DefaultView;
             }
             catch
             {

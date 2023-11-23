@@ -21,18 +21,18 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTextColumn Header="Заведующий кафедрой" Binding="{Binding manager}"/>
-                            <DataGridTextColumn Header="Имя" Binding="{Binding name}"/>
+                            <DataGridTextColumn Header="Имя кафедры" Binding="{Binding name}"/>
                             <DataGridTextColumn Header="Количество учителей" Binding="{Binding number_of_teachers}"/>
-                            <DataGridTemplateColumn Header="ID факультета">
+                            <DataGridTemplateColumn Header="Имя факультета">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding faculty_id}" />
+                                        <TextBlock Text="{Binding faculty_id, Converter={StaticResource FacultyIdToNameConverter}}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
-                                        <ComboBox ItemsSource="{Binding DataContext.ItemsSource, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                                    SelectedItem="{Binding faculty_id}" />
+                                        <ComboBox ItemsSource="{Binding DataContext.FacultyIdName.Values, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                    SelectedItem="{Binding faculty_id, Converter={StaticResource FacultyIdToNameConverter}}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>

@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:Program"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <local:FacultyIdToNameConverter x:Key="FacultyIdToNameConverter"/>
     </Application.Resources>
 </Application>
