@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Department</h1>
+        <a href="index.html">Back</a>
+        <div style="display: flex; flex-direction: column;">
+            <div style="display: flex; flex-direction: row; justify-content: center;">
+                <label>Image:</label>
+                <input type="file" id="insertDepartmentImage">
+                <label>Manager:</label>
+                <input type="text" id="insertDepartmentManager">
+                <label>Name:</label>
+                <input type="text" id="insertDepartmentName">
+                <label>NumberOfTeachers:</label>
+                <input type="number" id="insertDepartmentNumberOfTeachers">
+                <label>FacultyId:</label>
+                <input type="number" id="insertDepartmentFacultyId">
+                <button id="insertDepartment">Insert</button>
+            </div>
+            <div style="display: flex; flex-direction: row; justify-content: center;">
+                <label>Id:</label>
+                <input type="number" id="updateDepartmentId">
+                <label>Image:</label>
+                <input type="file" id="updateDepartmentImage">
+                <label>Manager:</label>
+                <input type="text" id="updateDepartmentManager">
+                <label>Name:</label>
+                <input type="text" id="updateDepartmentName">
+                <label>NumberOfTeachers:</label>
+                <input type="number" id="updateDepartmentNumberOfTeachers">
+                <label>FacultyId:</label>
+                <input type="number" id="updateDepartmentFacultyId">
+                <button id="updateDepartment">Update</button>
+            </div>
+            <div style="display: flex; flex-direction: row; justify-content: center;">
+                <label>Id:</label>
+                <input type="number" id="deleteDepartmentId">
+                <button id="deleteDepartment">Delete</button>
+            </div>
+            <button id="selectDepartment">Select</button>
+            <ul id="ulDepartment"></ul>
+        </div>
+    </body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../js/department.js"></script>
+</html>
