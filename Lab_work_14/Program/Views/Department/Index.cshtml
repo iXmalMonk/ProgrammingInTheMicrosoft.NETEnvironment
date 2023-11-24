@@ -13,7 +13,7 @@
             <th scope="col">Manager</th>
             <th scope="col">Name</th>
             <th scope="col">NumberOfTeachers</th>
-            <th scope="col">FacultyId</th>
+            <th scope="col">FacultyName</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
@@ -31,7 +31,7 @@
                 <td>@department.Manager</td>
                 <td>@department.Name</td>
                 <td>@department.NumberOfTeachers</td>
-                <td>@department.FacultyId</td>
+                <td>@Model.Faculty.FirstOrDefault(i => i.Id == department.Id)?.Name</td>
                 <td>
                     <form action="/Department/Delete/@department.Id">
                         <button type="submit" class="btn btn-danger m-1">Delete</button>
@@ -58,7 +58,7 @@
             <select class="form-control m-2" name="facultyId" required>
                 @foreach (var faculty in Model.Faculty)
                 {
-                    <option value="@faculty.Id">@faculty.Id</option>
+                    <option value="@faculty.Id">@faculty.Name</option>
                 }
             </select>
         </div>
@@ -89,7 +89,7 @@
             <select class="form-control m-2" name="facultyId" required>
                 @foreach (var faculty in Model.Faculty)
                 {
-                    <option value="@faculty.Id">@faculty.Id</option>
+                    <option value="@faculty.Id">@faculty.Name</option>
                 }
             </select>
         </div>
